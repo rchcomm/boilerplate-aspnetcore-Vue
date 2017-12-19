@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Vue2Spa.Models.Identity;
 
 namespace Vue2Spa.Models
 {
@@ -23,6 +24,7 @@ namespace Vue2Spa.Models
             builder.Entity<HttpFileInfo>().ToTable("TB_File_Info").HasKey(m => m.Id);
             // shadow properties
             builder.Entity<HttpFileInfo>().Property<DateTime>("UpdatedTimestamp");
+            builder.Entity<ApplicationUser>().Property<DateTime>("UpdatedTimestamp");
 
             base.OnModelCreating(builder);
         }
@@ -37,6 +39,7 @@ namespace Vue2Spa.Models
             ChangeTracker.DetectChanges();
 
             updateUpdatedProperty<HttpFileInfo>();
+            updateUpdatedProperty<ApplicationUser>();
 
             return base.SaveChanges();
         }

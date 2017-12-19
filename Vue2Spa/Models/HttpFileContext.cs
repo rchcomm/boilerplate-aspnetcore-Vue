@@ -16,16 +16,41 @@ namespace Vue2Spa.Models
 
         public DbSet<HttpFileInfo> HttpFileInfos { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder builder)
         {
-            modelBuilder.EnableAutoHistory(null);
+            builder.EnableAutoHistory(null);
 
-            modelBuilder.Entity<HttpFileInfo>().ToTable("TB_File_Info");
+            builder.Entity<HttpFileInfo>().ToTable("TB_File_Info").HasKey(m => m.Id);
+            // shadow properties
+            builder.Entity<HttpFileInfo>().Property<DateTime>("UpdatedTimestamp");
+
+            base.OnModelCreating(builder);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
+        }
+
+        public override int SaveChanges()
+        {
+            ChangeTracker.DetectChanges();
+
+            updateUpdatedProperty<HttpFileInfo>();
+
+            return base.SaveChanges();
+        }
+
+        private void updateUpdatedProperty<T>() where T : class
+        {
+            var modifiedSourceInfo =
+                ChangeTracker.Entries<T>()
+                    .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified);
+
+            foreach (var entry in modifiedSourceInfo)
+            {
+                entry.Property("UpdatedTimestamp").CurrentValue = DateTime.UtcNow;
+            }
         }
     }
 }

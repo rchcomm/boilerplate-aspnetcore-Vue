@@ -4,12 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Examples;
 using Swashbuckle.AspNetCore.Swagger;
 using Vue2Spa.Models;
@@ -42,7 +44,10 @@ namespace Vue2Spa
             services
               .AddDbContext<HttpFileContext>(options =>
               {
-                  //options.UseMySql("Server=localhost;database=unitofwork;uid=root;pwd=p@ssword;")
+                  //var sqlConnectionString = Configuration.GetConnectionString("DataAccessMySqlProvider");
+                  //options.UseMySql("Server=localhost;database=unitofwork;uid=root;pwd=p@ssword;");
+                  //// postgre
+                  //options.UseNpgsql(sqlConnectionString);
                   options.UseInMemoryDatabase("UnitOfWork");
                   //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
                   //options.UseSqlite("data.sqlite.db");
@@ -52,7 +57,11 @@ namespace Vue2Spa
             //services.AddDistributedMemoryCache();
 
             // Add framework services.
-            services.AddMvc();
+            services.AddMvc(options => {
+                
+            }).AddJsonOptions(options => {
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });
 
             services.AddSession(options => {
                 options.IdleTimeout = TimeSpan.FromMinutes(30);

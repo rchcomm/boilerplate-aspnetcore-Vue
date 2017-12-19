@@ -1,4 +1,4 @@
-﻿<template>
+<template>
     <div class="main-nav">
         <div class="navbar navbar-inverse">
             <div class="navbar-header">
@@ -28,21 +28,21 @@
 </template>
 
 <script>
-import { routes } from '../routes'
+    import { routes } from '../routes'
 
-export default {
-    data() {
-        return {
-            routes,
-            collapsed : true
-        }
-    },
-    methods: {
-        toggleCollapsed: function(event){
-            this.collapsed = !this.collapsed;
+    export default {
+        data() {
+            return {
+                routes,
+                collapsed: true
+            }
+        },
+        methods: {
+            toggleCollapsed: function (event) {
+                this.collapsed = !this.collapsed;
+            }
         }
     }
-}
 </script>
 
 <style>

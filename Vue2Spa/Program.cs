@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -18,6 +18,8 @@ namespace Vue2Spa
         public static IWebHost BuildWebHost(string[] args) =>
            WebHost.CreateDefaultBuilder(args)
                .UseStartup<Startup>()
+               //.CaptureStartupErrors(true)
+               //.UseSetting(WebHostDefaults.DetailedErrorsKey, "true")
                .Build();
     }
 }

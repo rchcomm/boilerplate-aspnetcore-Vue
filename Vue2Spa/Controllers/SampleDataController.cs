@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6,7 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Vue2Spa.Controllers
 {
-    [Route("api/[controller]")]
+    [ApiVersion("1.0")]
+    [Produces("application/json")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     public class SampleDataController : Controller
     {
         private static string[] Summaries = new[]
@@ -14,8 +16,8 @@ namespace Vue2Spa.Controllers
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
-        [HttpGet("[action]")]
-        public IEnumerable<WeatherForecast> WeatherForecasts()
+        [HttpGet]
+        public IEnumerable<WeatherForecast> Gets()
         {
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast

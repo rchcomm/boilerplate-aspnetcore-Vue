@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "8cf7d97ece7afacff2aa"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "3802bfe31a3e0420ac35"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -12967,7 +12967,7 @@ exports = module.exports = __webpack_require__(24)();
 
 
 // module
-exports.push([module.i, "\n.slide-enter-active, .slide-leave-active {\r\n  transition: max-height .35s\n}\n.slide-enter, .slide-leave-to {\r\n  max-height: 0px;\n}\n.slide-enter-to, .slide-leave {\r\n  max-height: 20em;\n}\r\n", "", {"version":3,"sources":["D:/Sources/Github/boilerplate-aspnetcore-Vue/Vue2Spa/ClientApp/components/nav-menu.vue?70f1b6f2"],"names":[],"mappings":";AAgDA;EACA,2BAAA;CACA;AACA;EACA,gBAAA;CACA;AAEA;EACA,iBAAA;CACA","file":"nav-menu.vue","sourcesContent":["<template>\r\n    <div class=\"main-nav\">\r\n        <div class=\"navbar navbar-inverse\">\r\n            <div class=\"navbar-header\">\r\n                <button type=\"button\" class=\"navbar-toggle\" v-on:click=\"toggleCollapsed\">\r\n                        <span class=\"sr-only\">Toggle navigation</span>\r\n                        <span class=\"icon-bar\"></span>\r\n                        <span class=\"icon-bar\"></span>\r\n                        <span class=\"icon-bar\"></span>\r\n                    </button>\r\n                <a class=\"navbar-brand\" href=\"/\">Vue2Spa</a>\r\n            </div>\r\n            <div class=\"clearfix\"></div>\r\n            <transition name=\"slide\">\r\n                <div class=\"navbar-collapse collapse in\" v-show=\"!collapsed\">\r\n                    <ul class=\"nav navbar-nav\">\r\n                        <li v-for=\"route in routes\">\r\n                            <!-- TODO: highlight active link -->\r\n                            <router-link :to=\"route.path\">\r\n                                <span :class=\"route.style\"></span> {{ route.display }}\r\n                            </router-link>\r\n                        </li>\r\n                    </ul>\r\n                </div>\r\n            </transition>\r\n        </div>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import { routes } from '../routes'\r\n\r\n    export default {\r\n        data() {\r\n            return {\r\n                routes,\r\n                collapsed: true\r\n            }\r\n        },\r\n        methods: {\r\n            toggleCollapsed: function (event) {\r\n                this.collapsed = !this.collapsed;\r\n            }\r\n        }\r\n    }\r\n</script>\r\n\r\n<style>\r\n.slide-enter-active, .slide-leave-active {\r\n  transition: max-height .35s\r\n}\r\n.slide-enter, .slide-leave-to {\r\n  max-height: 0px;\r\n}\r\n\r\n.slide-enter-to, .slide-leave {\r\n  max-height: 20em;\r\n}\r\n</style>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.slide-enter-active, .slide-leave-active {\r\n  transition: max-height .35s\n}\n.slide-enter, .slide-leave-to {\r\n  max-height: 0px;\n}\n.slide-enter-to, .slide-leave {\r\n  max-height: 20em;\n}\r\n", "", {"version":3,"sources":["d:/Sources/GitHub/boilerplate-aspnetcore-Vue/Vue2Spa/ClientApp/components/nav-menu.vue?a575b096"],"names":[],"mappings":";AAgDA;EACA,2BAAA;CACA;AACA;EACA,gBAAA;CACA;AAEA;EACA,iBAAA;CACA","file":"nav-menu.vue","sourcesContent":["<template>\r\n    <div class=\"main-nav\">\r\n        <div class=\"navbar navbar-inverse\">\r\n            <div class=\"navbar-header\">\r\n                <button type=\"button\" class=\"navbar-toggle\" v-on:click=\"toggleCollapsed\">\r\n                        <span class=\"sr-only\">Toggle navigation</span>\r\n                        <span class=\"icon-bar\"></span>\r\n                        <span class=\"icon-bar\"></span>\r\n                        <span class=\"icon-bar\"></span>\r\n                    </button>\r\n                <a class=\"navbar-brand\" href=\"/\">Vue2Spa</a>\r\n            </div>\r\n            <div class=\"clearfix\"></div>\r\n            <transition name=\"slide\">\r\n                <div class=\"navbar-collapse collapse in\" v-show=\"!collapsed\">\r\n                    <ul class=\"nav navbar-nav\">\r\n                        <li v-for=\"route in routes\">\r\n                            <!-- TODO: highlight active link -->\r\n                            <router-link :to=\"route.path\">\r\n                                <span :class=\"route.style\"></span> {{ route.display }}\r\n                            </router-link>\r\n                        </li>\r\n                    </ul>\r\n                </div>\r\n            </transition>\r\n        </div>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import { routes } from '../routes'\r\n\r\n    export default {\r\n        data() {\r\n            return {\r\n                routes,\r\n                collapsed: true\r\n            }\r\n        },\r\n        methods: {\r\n            toggleCollapsed: function (event) {\r\n                this.collapsed = !this.collapsed;\r\n            }\r\n        }\r\n    }\r\n</script>\r\n\r\n<style>\r\n.slide-enter-active, .slide-leave-active {\r\n  transition: max-height .35s\r\n}\r\n.slide-enter, .slide-leave-to {\r\n  max-height: 0px;\r\n}\r\n\r\n.slide-enter-to, .slide-leave {\r\n  max-height: 20em;\r\n}\r\n</style>\r\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -14105,7 +14105,7 @@ var Component = __webpack_require__(36)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Sources\\Github\\boilerplate-aspnetcore-Vue\\Vue2Spa\\ClientApp\\components\\counter-example.vue"
+Component.options.__file = "d:\\Sources\\GitHub\\boilerplate-aspnetcore-Vue\\Vue2Spa\\ClientApp\\components\\counter-example.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] counter-example.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -14143,7 +14143,7 @@ var Component = __webpack_require__(36)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Sources\\Github\\boilerplate-aspnetcore-Vue\\Vue2Spa\\ClientApp\\components\\fetch-data.vue"
+Component.options.__file = "d:\\Sources\\GitHub\\boilerplate-aspnetcore-Vue\\Vue2Spa\\ClientApp\\components\\fetch-data.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] fetch-data.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -14181,7 +14181,7 @@ var Component = __webpack_require__(36)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Sources\\Github\\boilerplate-aspnetcore-Vue\\Vue2Spa\\ClientApp\\components\\home-page.vue"
+Component.options.__file = "d:\\Sources\\GitHub\\boilerplate-aspnetcore-Vue\\Vue2Spa\\ClientApp\\components\\home-page.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] home-page.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -19054,7 +19054,7 @@ var Component = __webpack_require__(36)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Sources\\Github\\boilerplate-aspnetcore-Vue\\Vue2Spa\\ClientApp\\components\\app-root.vue"
+Component.options.__file = "d:\\Sources\\GitHub\\boilerplate-aspnetcore-Vue\\Vue2Spa\\ClientApp\\components\\app-root.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] app-root.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -19092,7 +19092,7 @@ var Component = __webpack_require__(36)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Sources\\Github\\boilerplate-aspnetcore-Vue\\Vue2Spa\\ClientApp\\components\\nav-menu.vue"
+Component.options.__file = "d:\\Sources\\GitHub\\boilerplate-aspnetcore-Vue\\Vue2Spa\\ClientApp\\components\\nav-menu.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] nav-menu.vue: functional components are not supported with templates, they should use render functions.")}
 

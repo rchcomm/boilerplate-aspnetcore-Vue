@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Examples;
 using Swashbuckle.AspNetCore.Swagger;
+using Vue2Spa.Models;
 
 namespace Vue2Spa
 {
@@ -37,16 +38,18 @@ namespace Vue2Spa
 
             });
 
-            //// use in memory for testing.
-            //services
-            //  .AddDbContext<HttpFileContext>(options => {
-            //        //options.UseMySql("Server=localhost;database=unitofwork;uid=root;pwd=p@ssword;")
-            //        options.UseInMemoryDatabase("UnitOfWork");
-            //        //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
-            //    })
-            //  .AddUnitOfWork<HttpFileContext>();
-            //// Adds a default in-memory implementation of IDistributedCache.
-            ////services.AddDistributedMemoryCache();
+            // use in memory for testing.
+            services
+              .AddDbContext<HttpFileContext>(options =>
+              {
+                  //options.UseMySql("Server=localhost;database=unitofwork;uid=root;pwd=p@ssword;")
+                  options.UseInMemoryDatabase("UnitOfWork");
+                  //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+                  //options.UseSqlite("data.sqlite.db");
+              })
+              .AddUnitOfWork<HttpFileContext>();
+            // Adds a default in-memory implementation of IDistributedCache.
+            //services.AddDistributedMemoryCache();
 
             // Add framework services.
             services.AddMvc();
@@ -69,11 +72,12 @@ namespace Vue2Spa
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info() { Title = "My API", Version = "v1" });
+                c.SwaggerDoc("v1", new Info() { Title = "My API 1.0", Version = "1.0" });
+                //c.SwaggerDoc("v2", new Info() { Title = "My API 2.0", Version = "2.0" });
 
                 c.OperationFilter<ExamplesOperationFilter>(); // [SwaggerRequestExample] & [SwaggerResponseExample]
-                c.OperationFilter<DescriptionOperationFilter>(); // [Description] on Response properties
-                c.OperationFilter<AuthorizationInputOperationFilter>(); // Adds an Authorization input box to every endpoint
+                //c.OperationFilter<DescriptionOperationFilter>(); // [Description] on Response properties
+                //c.OperationFilter<AuthorizationInputOperationFilter>(); // Adds an Authorization input box to every endpoint
             });
         }
 
@@ -103,8 +107,11 @@ namespace Vue2Spa
 
             app.UseSwagger();
             app.UseSwaggerUI(c => {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API 1.0");
             });
+            //app.UseSwaggerUI(c => {
+            //    c.SwaggerEndpoint("/swagger/v2/swagger.json", "My API 2.0");
+            //});
 
             app.UseMvc(routes =>
             {

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Examples;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using Vue2Spa.Models;
 
 namespace Vue2Spa.Controllers
 {
@@ -17,6 +20,7 @@ namespace Vue2Spa.Controllers
         };
 
         [HttpGet]
+        [SwaggerRequestExample(typeof(WeatherForecast), typeof(WeatherForecastExample))]
         public IEnumerable<WeatherForecast> Gets()
         {
             var rng = new Random();
@@ -26,21 +30,6 @@ namespace Vue2Spa.Controllers
                 TemperatureC = rng.Next(-20, 55),
                 Summary = Summaries[rng.Next(Summaries.Length)]
             });
-        }
-
-        public class WeatherForecast
-        {
-            public string DateFormatted { get; set; }
-            public int TemperatureC { get; set; }
-            public string Summary { get; set; }
-
-            public int TemperatureF
-            {
-                get
-                {
-                    return 32 + (int)(TemperatureC / 0.5556);
-                }
-            }
         }
     }
 }

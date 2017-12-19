@@ -74,11 +74,14 @@ namespace Vue2Spa
             {
                 c.SwaggerDoc("v1", new Info() { Title = "My API 1.0", Version = "1.0" });
                 //c.SwaggerDoc("v2", new Info() { Title = "My API 2.0", Version = "2.0" });
+                c.OperationFilter<ExamplesOperationFilter>(services.BuildServiceProvider());
 
-                c.OperationFilter<ExamplesOperationFilter>(); // [SwaggerRequestExample] & [SwaggerResponseExample]
+                //c.OperationFilter<ExamplesOperationFilter>(); // [SwaggerRequestExample] & [SwaggerResponseExample]
                 //c.OperationFilter<DescriptionOperationFilter>(); // [Description] on Response properties
                 //c.OperationFilter<AuthorizationInputOperationFilter>(); // Adds an Authorization input box to every endpoint
             });
+
+            services.AddTransient<WeatherForecastExample>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

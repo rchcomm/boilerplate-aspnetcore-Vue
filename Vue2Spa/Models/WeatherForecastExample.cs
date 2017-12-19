@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Hosting;
 using Swashbuckle.AspNetCore.Examples;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,13 @@ namespace Vue2Spa.Models
 {
     public class WeatherForecastExample : IExamplesProvider
     {
+        private readonly IHostingEnvironment env;
+
+        public WeatherForecastExample(IHostingEnvironment env)
+        {
+            this.env = env;
+        }
+
         public object GetExamples()
         {
             var rng = new Random();

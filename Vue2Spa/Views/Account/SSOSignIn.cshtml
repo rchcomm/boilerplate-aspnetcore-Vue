@@ -1,0 +1,21 @@
+@{
+  ViewData["Title"] = "Sign In";
+}
+
+@section scripts {
+  <script>
+    $(function () {
+      
+
+      setTimeout(function () {
+        document.location.href = decodeURIComponent(document.location.search.replace('?ReturnUrl=', '')) + document.location.hash;
+      }, 1000);
+
+    });
+  </script>
+}
+
+<form action="../Account/SSOSignIn" method="POST">
+  <input type="hidden" name="chiperUserId" id="chiperUserId" value="default" />
+  <input type="submit" />
+</form>

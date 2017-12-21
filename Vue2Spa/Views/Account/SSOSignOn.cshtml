@@ -1,0 +1,25 @@
+@{
+  ViewData["Title"] = "SignOn";
+}
+
+@section scripts {
+  <script>
+  $(function () {
+    $('form').submit(function () {
+      this.action = this.action + document.location.search + document.location.hash;
+      this.submit();
+
+     });
+
+    setTimeout(function () {
+      $('form').trigger('submit');
+     }, 1000);
+    
+   });
+  </script>
+}
+
+<form action="../Account/SSOSignIn" method="POST">
+  <input type="hidden" name="chiperUserId" id="chiperUserId" value="default" />
+  <input type="submit" />
+</form>

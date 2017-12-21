@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
@@ -21,6 +22,7 @@ using Newtonsoft.Json.Serialization;
 using Swashbuckle.AspNetCore.Examples;
 using Swashbuckle.AspNetCore.Swagger;
 using Vue2Spa.Models;
+using Vue2Spa.Models.AuthenticationEvents;
 using Vue2Spa.Models.Identity;
 
 namespace Vue2Spa
@@ -56,14 +58,14 @@ namespace Vue2Spa
                   //// postgre
                   //options.UseNpgsql(sqlConnectionString);
                   options.UseInMemoryDatabase("UnitOfWork");
-                  //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+                  //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));   //Configuration["Data:DefaultConnection:ConnectionString"]
                   //options.UseSqlite("data.sqlite.db");
               })
               .AddUnitOfWork<HttpFileContext>();
             // Adds a default in-memory implementation of IDistributedCache.
             //services.AddDistributedMemoryCache();
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, ApplicationRole>()
               .AddEntityFrameworkStores<HttpFileContext>()
               .AddDefaultTokenProviders();
 
@@ -91,11 +93,31 @@ namespace Vue2Spa
                 // Cookie settings
                 options.Cookie.HttpOnly = true;
                 options.Cookie.Expiration = TimeSpan.FromDays(150);
-                options.LoginPath = "/Account/Login"; // If the LoginPath is not set here, ASP.NET Core will default to /Account/Login
-                options.LogoutPath = "/Account/Logout"; // If the LogoutPath is not set here, ASP.NET Core will default to /Account/Logout
+                options.LoginPath = "/Account/SSOSignOn"; // If the LoginPath is not set here, ASP.NET Core will default to /Account/Login
+                options.LogoutPath = "/Account/SignOut"; // If the LogoutPath is not set here, ASP.NET Core will default to /Account/Logout
                 options.AccessDeniedPath = "/Account/AccessDenied"; // If the AccessDeniedPath is not set here, ASP.NET Core will default to /Account/AccessDenied
                 options.SlidingExpiration = true;
             });
+
+            //services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            //    .AddCookie();
+
+            services
+              .AddAuthentication(options => {
+                  options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                  options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                  options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+              })
+              .AddCookie(options => {
+                  //options.EventsType = typeof(CustomCookieAuthenticationEvents);
+
+                  options.LoginPath = "/Account/SSOSignOn";
+                  options.LogoutPath = "/Account/SignOut";
+                  options.AccessDeniedPath = "/Account/AccessDenied";
+                  options.SlidingExpiration = true;
+                  options.Cookie.HttpOnly = true;
+                  options.Cookie.Expiration = TimeSpan.FromDays(15);
+              });
 
             // Add framework services.
             services.AddMvc(options => {
@@ -110,10 +132,10 @@ namespace Vue2Spa
                 options.SerializerSettings.MissingMemberHandling = MissingMemberHandling.Ignore;
             });
 
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("EmployeeOnly", policy => policy.RequireClaim("EmployeeNumber"));
-            });
+            //services.AddAuthorization(options =>
+            //{
+            //    options.AddPolicy("EmployeeOnly", policy => policy.RequireClaim("EmployeeNumber"));
+            //});
 
             services.AddSession(options => {
                 options.IdleTimeout = TimeSpan.FromMinutes(30);

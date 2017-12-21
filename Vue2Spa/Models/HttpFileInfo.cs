@@ -9,7 +9,5 @@ namespace Vue2Spa.Models
     public class HttpFileInfo
     {
         public int Id { get; set; }
-
-        public DateTime Timestamp { get; set; }
     }
 }

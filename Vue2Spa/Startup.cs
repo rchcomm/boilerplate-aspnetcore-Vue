@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.Mvc.Versioning;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -132,6 +134,24 @@ namespace Vue2Spa
                 options.SerializerSettings.MissingMemberHandling = MissingMemberHandling.Ignore;
             });
 
+            #region Compression - https://docs.microsoft.com/en-us/aspnet/core/performance/response-compression?tabs=aspnetcore2x only selfhosting
+            #region Default Case
+            //services.AddResponseCompression();
+            #endregion
+            #region Custom Case
+            //services.AddResponseCompression(options =>
+            //{
+            //    options.Providers.Add<GzipCompressionProvider>();
+            //    //options.Providers.Add<CustomCompressionProvider>();
+            //    //options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[] { "image/svg+xml" });
+            //});
+
+            //services.Configure<GzipCompressionProviderOptions>(options =>
+            //{
+            //    options.Level = CompressionLevel.Fastest;
+            //});
+            #endregion
+            #endregion
             //services.AddAuthorization(options =>
             //{
             //    options.AddPolicy("EmployeeOnly", policy => policy.RequireClaim("EmployeeNumber"));
@@ -207,7 +227,8 @@ namespace Vue2Spa
             app.UseSession();
             app.UseDefaultFiles();
             app.UseStaticFiles();
-            app.UseAuthentication();            
+            app.UseAuthentication();
+            app.UseResponseCompression();
 
             app.UseSwagger();
             app.UseSwaggerUI(c => {

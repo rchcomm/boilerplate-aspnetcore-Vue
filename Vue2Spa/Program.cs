@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Builder;
 
 namespace Vue2Spa
 {
@@ -17,9 +18,9 @@ namespace Vue2Spa
 
         public static IWebHost BuildWebHost(string[] args) =>
            WebHost.CreateDefaultBuilder(args)
-               .UseStartup<Startup>()
-               //.CaptureStartupErrors(true)
-               //.UseSetting(WebHostDefaults.DetailedErrorsKey, "true")
-               .Build();
+                .UseStartup<Startup>()
+                //.CaptureStartupErrors(true)
+                //.UseSetting(WebHostDefaults.DetailedErrorsKey, "true")
+                .Build();
     }
 }

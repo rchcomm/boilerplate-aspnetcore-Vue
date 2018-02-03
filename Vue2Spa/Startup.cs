@@ -136,7 +136,7 @@ namespace Vue2Spa
 
             #region Compression - https://docs.microsoft.com/en-us/aspnet/core/performance/response-compression?tabs=aspnetcore2x only selfhosting
             #region Default Case
-            //services.AddResponseCompression();
+            services.AddResponseCompression();
             #endregion
             #region Custom Case
             //services.AddResponseCompression(options =>
